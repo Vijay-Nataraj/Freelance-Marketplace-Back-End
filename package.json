@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This project is the backend for a freelance marketplace where freelancers can offer their services and clients can post job listings. The platform includes features for user authentication, payment processing, and reviews to facilitate seamless interactions between freelancers and clients.",
+  "homepage": "https://github.com/Vijay-Nataraj/Freelance-Marketplace-Back-End#readme",
+  "bugs": {
+    "url": "https://github.com/Vijay-Nataraj/Freelance-Marketplace-Back-End/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vijay-Nataraj/Freelance-Marketplace-Back-End.git"
+  },
+  "license": "ISC",
+  "author": "Vijay Nataraj",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
