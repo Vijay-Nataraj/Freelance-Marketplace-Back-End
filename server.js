@@ -3,6 +3,7 @@ const { MONGODB_URI, PORT } = require("./utils/config");
 const app = require("./app");
 
 console.log(`Connecting to the database...`);
+
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
