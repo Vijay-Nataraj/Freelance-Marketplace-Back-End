@@ -46,15 +46,15 @@ const authController = {
 
       const token = generateToken(user);
 
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Strict",
-      });
+      // res.cookie("token", token, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === "production",
+      //   sameSite: "Strict",
+      // });
 
       res.status(200).json({
         message: "Login successful",
-        token,
+        token: token,
         role: user.role,
         freelancerID: user._id,
         email: user.email,
