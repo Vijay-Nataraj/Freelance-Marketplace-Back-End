@@ -4,70 +4,62 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET, NODE_ENV } = require("../utils/config");
 const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
+const { generateToken } = require("../utils/token");
 
 const authController = {
   register: async (req, res) => {
+    const { username, email, password, role } = req.body;
     try {
-      console.log(req.body);
-
-      // get the user input
-      const { username, email, password } = req.body;
+      const existingUser = await User.findOne({ email });
+      if (existingUser)
+        return res.status(400).json({ msg: "User already exists" });
 
       const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({
+        username,
+        email,
+        password: hashedPassword,
+        role,
+      });
 
-      // create a new user object
-      const newUser = new User({ username, email, password: hashedPassword });
-
-      //save the user
       await newUser.save();
-
-      res.status(200).json({ message: "User registered successfully" });
+      res
+        .status(200)
+        .json({ message: "User registered successfully", newUser });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
   },
 
   login: async (req, res) => {
+    const { email, password } = req.body;
     try {
-      console.log(req.body);
-
-      // get the email, password from the req.body
-      const { email, password } = req.body;
-
-      // check if the user exists
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ error: "User does not found" });
       }
 
-      //compare if the password is correct
       const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
       if (!isPasswordCorrect) {
         return res.status(400).json({ error: "Invalid credentials" });
       }
 
-      //generate token
-      const token = await jwt.sign({ id: user._id }, JWT_SECRET, {
-        expiresIn: "3h",
-      });
+      const token = generateToken(user);
 
-      //   console.log(token);
-
-      //send the token to the http only cookie
       res.cookie("token", token, {
         httpOnly: true,
-        secure: NODE_ENV,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "Strict",
       });
 
-      //send the token as a cookie
-      // res.header(
-      //   "Set-Cookie",
-      //   "token=" + token + "; HttpOnly; Secure; SameSite=None; Path=/;"
-      // );
-
-      res.status(200).json({ token, message: "Login successful" });
+      res.status(200).json({
+        message: "Login successful",
+        token,
+        role: user.role,
+        freelancerID: user._id,
+        email: user.email,
+        user,
+      });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -146,6 +138,22 @@ const authController = {
       res.status(200).json({ message: "Password has been updated" });
     } catch (error) {
       res.status(500).json({ message: error.message });
+    }
+  },
+
+  logout: async (req, res) => {
+    try {
+      // clear the token from the cookie
+      res.clearCookie("token", {
+        httpOnly: true,
+        secure: NODE_ENV,
+        sameSite: "Strict",
+      });
+
+      // return a success message
+      res.status(200).json({ message: "Logged out successful" });
+    } catch (error) {
+      response.status(500).json({ message: error.message });
     }
   },
 };

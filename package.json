@@ -1,7 +1,7 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "Back End api for email password authentication",
+  "description": "",
   "keywords": [
     "rest",
     "express",
@@ -11,13 +11,9 @@
     "reset-password",
     "jsonwebtoken"
   ],
-  "homepage": "https://github.com/Vijay-Nataraj/Password-Reset-Back-End#readme",
-  "bugs": {
-    "url": "https://github.com/Vijay-Nataraj/Password-Reset-Back-End/issues"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vijay-Nataraj/Password-Reset-Back-End.git"
+    "url": ""
   },
   "license": "ISC",
   "author": "Vijay Nataraj",

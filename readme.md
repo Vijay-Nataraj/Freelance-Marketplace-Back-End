@@ -1,31 +1,37 @@
-# Password Reset
+# Freelance Marketplace
 
-## Password Reset Back End
-
-Back End api for email password authentication.
+A MERN stack application that connects freelancers with clients, allowing them to post jobs, find freelancers, and manage contracts.
 
 ## Table of Contents
 
-- [Installation](#installation)
+- [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Error Handling](#error-handling)
-- [Documentation URL](#documentation-url)
+- [Documentation URL](#documentationurl)
+
+## Features
+
+- **User Authentication**: Clients and freelancers can register and log in.
+- **Job Posting**: Clients can post job listings with details such as title, description, budget, and skills required.
+- **Freelancer Search**: Clients can search for freelancers based on skills and ratings.
+- **Contract Management**: Clients and freelancers can manage contracts, including milestones and status updates.
+- **Reviews and Ratings**: Clients can leave reviews and ratings for freelancers after project completion.
 
 ## Technologies Used
 
-- **Node.js**: JavaScript runtime built on Chrome's V8 engine.
-- **Express**: Fast, unopinionated, minimalist web framework for Node.js.
-- **Mongoose**: ODM library for MongoDB.
-- **Nodemailer**: Module for sending emails.
-- **JWT (jsonwebtoken)**: For secure authentication.
+- **Frontend**: React, React Router, Axios, Tailwind CSS
+- **Backend**: Node.js, Express.js, Mongoose
+- **Database**: MongoDB
+- **Authentication**: JSON Web Tokens (JWT)
 
 ## Installation
 
 1. **Clone the repository**:
 
    ```bash
-    git clone https://github.com/Vijay-Nataraj/Password-Reset-Back-End.git
+    git clone
 
 
    ```
@@ -34,7 +40,7 @@ Back End api for email password authentication.
 
    ```bash
 
-       cd Password-Reset-Back-End
+       cd backend
 
    ```
 
@@ -69,145 +75,22 @@ Back End api for email password authentication.
 
 ## API Endpoints
 
-**User Registration**
+## API Endpoints
 
-- Endpoint: `/api/v1/register`
+**User Authentication**
+POST /api/v1/auth/register: Register a new user (client or freelancer).
+POST /api/v1/auth/login: Log in a user.
 
-- Method: `POST`
+**Job Management**
+POST /api/v1/jobs: Create a new job listing.
+GET /api/v1/jobs: Retrieve all job listings.
 
-- Description: Register a new user
+**Freelancer Management**
+GET /api/v1/freelancers: Retrieve all freelancers.
 
-- Request Body:
-
-  ```json
-  {
-    "username": "username",
-    "email": "user@example.com",
-    "password": "securepassword"
-  }
-  ```
-
-- Response:
-
-  - Success: `200 OK`
-
-    ```json
-    {
-      "message": "User registered successfully"
-    }
-    ```
-
-  - Error: `400 Bad Request`
-
-    ```json
-    {
-      "message": "E11000 duplicate key error collection: Password_Reset.users index: email_1 dup key: { email: \"user@example.com\" }"
-    }
-    ```
-
-**User Login**
-
-- Endpoint: `/api/v1/login`
-
-- Method: `POST`
-
-- Description: Logs in an existing user.
-
-- Request Body:
-
-  ```json
-  {
-    "email": "user@example.com",
-    "password": "securepassword"
-  }
-  ```
-
-- Response:
-
-  - Success: `200 OK`
-
-    ```json
-    {
-      "message": "Login successful",
-      "token": "jwt-token-here"
-    }
-    ```
-
-  - Error: `400 Bad Request`
-
-    ```json
-    {
-      "error": "Invalid credentials"
-    }
-    ```
-
-**Forgot Password**
-
-- Endpoint: `/api/v1/forgot-password`
-
-- Method: `POST`
-
-- Description: Sends a password reset link to the user's email.
-
-- Request Body:
-
-  ```json
-  {
-    "email": "user@example.com"
-  }
-  ```
-
-- Response:
-
-  - Success: `200 OK`
-
-    ```json
-    {
-      "message": "Password reset link sent successfully"
-    }
-    ```
-
-  - Error: `400 Bad Request`
-
-    ```json
-    {
-      "message": "User not found"
-    }
-    ```
-
-**Reset Password**
-
-- Endpoint: `/api/v1/reset-password/:token`
-
-- Method: `POST`
-
-- Description: Resets the user's password using the token.
-
-- Request Body:
-
-  ```json
-  {
-    "password": "newsecurepassword"
-  }
-  ```
-
-- Response:
-
-  - Success: `200 OK`
-
-    ```json
-    {
-      "message": "Password has been updated"
-    }
-    ```
-
-  - Error: `400 Bad Request`
-
-    ```json
-    {
-      "message": "Password reset token is invalid or has expired"
-    }
-    ```
+**Contract Management**
+POST /api/v1/contracts: Create a new contract.
+GET /api/v1/contracts: Retrieve all contracts.
 
 ## Error Handling
 
@@ -215,4 +98,4 @@ Proper error handling is implemented to ensure meaningful error messages are ret
 
 ## Documentation URL
 
-[POSTMAN API Documentation URL: ](https://documenter.getpostman.com/view/40014100/2sAYQZJCFq)
+[POSTMAN API Documentation URL: ](https://documenter.getpostman.com/view/40014100/2sAYdmm8Db)
