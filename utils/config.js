@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET;
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;

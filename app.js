@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "vj-freelance-marketplace.netlify.app",
+    origin: "https://vj-freelance-marketplace.netlify.app",
     credentials: true,
   })
 );

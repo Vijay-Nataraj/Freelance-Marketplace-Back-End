@@ -4,7 +4,7 @@ const { JWT_SECRET } = require("../utils/config");
 
 const auth = {
   checkAuth: (req, res, next) => {
-    const token = req.headers["authorization"]?.split(" ")[1]; // Get token from 'Authorization: Bearer token'
+    const token = req.header("Authorization")?.replace("Bearer ", ""); // Extract the token from Authorization header
 
     if (!token) {
       return res.status(401).json({ message: "No token provided" });
